@@ -42,11 +42,39 @@ void test_isLength()
 
 }
 
+void test_find()
+{
+    DLList myList;
+    for(int i = 0; i < 20; ++i)
+	myList.insertNum(i);
+    cout << "findNum with num present: " << myList.findNum(0) << endl;
+    cout << "findNum with num not present: " << myList.findNum(100) << endl;
+
+}
+
+void test_delete()
+{
+    DLList myList;
+    for(int i = 0; i < 20; ++i)
+	myList.insertNum(i);
+    // head delete
+    myList.deleteNum(0);
+    // tail delete
+    myList.deleteNum(19);
+    // middle delete
+    myList.deleteNum(10);
+    myList.print();
+    cout << "rev print" << endl;
+    myList.revPrint();
+}
+
 int main()
 {
 //    test_constr_destr();
-    test_insert();
+//    test_insert();
 //    test_isEmpty();
 //    test_isLength();
+//    test_delete();
+    test_find();
     return 0;
 }

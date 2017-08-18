@@ -66,8 +66,46 @@ class DLList
 	}
 	++numNodes;
     }
-    void deleteNum(int n);
-    bool findNum(int n);
+    void deleteNum(int n)
+    {
+        Node * trav = nullptr;
+	Node * trail = nullptr;
+	for(trav = head; trav != nullptr && trav->data != n; trav = trav->next)
+	    trail = trav;
+	if(trav == nullptr)
+	    cout << "not found" << endl;
+	// head delete
+	else if(trav == head)
+	{
+	    trav->next->last = nullptr;
+	    head = head->next;
+	    delete trav;
+	}
+	// tail delete
+	else if(trav == tail)
+	{
+	    trail->next = nullptr;
+	    delete trav;
+	    tail = trail;
+	}
+	// middle delete
+	else
+	{
+	    trav->next->last = trail;
+	    trail->next = trav->next;
+	    delete trav;
+	}
+	--numNodes;
+    }
+    bool findNum(int n)
+    {
+        Node * trav = nullptr;
+	for(trav = head; trav != nullptr && trav->data != n; trav=trav->next)
+		;
+	if(trav != nullptr)
+	    return true;
+	return false;
+    }
     int getLength()
     {
         return numNodes;
@@ -93,14 +131,6 @@ class DLList
 	while(trav != nullptr)
 	{
 	    cout << "node with val " << trav->data << endl;
-	    if(trav->next != nullptr)
-		cout << "next val " << trav->next->data << endl;
-	    else
-		cout << "next is null" << endl;
-	    if(trav->last != nullptr)
-	        cout << "last val " << trav->last->data << endl;
-	    else
-                cout << "last is null" << endl; 
 	    trav = trav->next;
 	}
     }
