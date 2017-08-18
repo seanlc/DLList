@@ -11,8 +11,18 @@ void test_constr_destr()
 void test_insert()
 {
     DLList myList;
+    for(int i = 1; i < 20; ++i)
+        myList.insertNum(i);
+    // head insert
     myList.insertNum(0);
+    // middle insert
+    myList.insertNum(10);
+    // tail insert
+    myList.insertNum(30);
+    cout << "forward print" << endl;
     myList.print();
+    cout << "reverse print" << endl;
+    myList.revPrint();
 }
 
 void test_isEmpty()
@@ -35,8 +45,8 @@ void test_isLength()
 int main()
 {
 //    test_constr_destr();
-//    test_insert();
+    test_insert();
 //    test_isEmpty();
-    test_isLength();
+//    test_isLength();
     return 0;
 }

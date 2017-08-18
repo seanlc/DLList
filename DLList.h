@@ -33,6 +33,7 @@ class DLList
 	newNode->data = n;
 	newNode->next = nullptr;
 	newNode->last = nullptr;
+        
 
 	// empty list case
         if(head == nullptr && tail == nullptr)
@@ -44,21 +45,32 @@ class DLList
 	{
 
 	    // find insertion spot
-	    for(trav = head; newNode->data > trav->data; trav = trav->next)
-            {
+	    for(trav = head; trav != nullptr && newNode->data > trav->data; trav = trav->next)
 	        trail = trav;
-	    }
-
+	    // head insert
 	    if(trav == head)
 	    {
 	        trav->last = newNode;
 		newNode->next = trav;
 		head = newNode;
 	    }
+	    // tail insert
+	    else if(trav == nullptr)
+	    {
+	        trail->next = newNode;
+		newNode->last = trail;
+		tail = newNode;
+	    }
+	    // middle insert
+	    else
+	    {
+	        newNode->last = trail;
+		trail->next = newNode;
+		newNode->next = trav;
+		trav->last = newNode;
+	    }
 	}
-
 	++numNodes;
-
     }
     void deleteNum(int n);
     bool findNum(int n);
@@ -77,8 +89,25 @@ class DLList
 	while(trav != nullptr)
 	{
 	    cout << "node with val " << trav->data << endl;
+	    if(trav->next != nullptr)
+		cout << "next val " << trav->next->data << endl;
+	    else
+		cout << "next is null" << endl;
+	    if(trav->last != nullptr)
+	        cout << "last val " << trav->last->data << endl;
+	    else
+                cout << "last is null" << endl; 
 	    trav = trav->next;
 	}
+    }
+    void revPrint()
+    {
+        Node * trav = tail;
+        while(trav != nullptr)
+	{
+	    cout << "node with val " << trav->data << endl;
+	    trav = trav->last;
+	}	
     }
   private:
     Node * head;
