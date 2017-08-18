@@ -17,13 +17,7 @@ class DLList
     {}
     ~DLList()
     {
-        Node * tmp = head;
-	while(tmp != nullptr)
-	{
-	    head = head->next;
-	    delete tmp;
-	    tmp = head;
-	}
+        makeEmpty();
     }
     void insertNum(int n)
     {
@@ -78,7 +72,17 @@ class DLList
     {
         return numNodes;
     }
-    void makeEmpty();
+    void makeEmpty()
+    {
+        Node * tmp = head;
+	while(tmp != nullptr)
+	{
+	    head = head->next;
+	    delete tmp;
+	    tmp = head;
+	}
+	numNodes = 0;
+    }
     bool isEmpty()
     {
         return numNodes == 0;
